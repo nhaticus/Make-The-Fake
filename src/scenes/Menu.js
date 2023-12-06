@@ -4,13 +4,13 @@ class Menu extends Phaser.Scene {
     };
 
     create() {
-        this.cameras.main.setBackgroundColor(0x99ffcc);
+        this.cameras.main.setBackgroundColor(0xFACADE)
+        this.add.image(0, 0, 'Menu').setOrigin(0)
 
         let menuConfig = {
-            fontFamily: 'toonyFont', 
-            fontSize: '48px',
-            backgroundColor: '#33cc33',
-            color: '#ffffff',
+            fontFamily: 'Arial', 
+            fontSize: '32px',
+            color: '#000',
             align: 'right',
             padding: {
                 top: 5,
@@ -19,41 +19,30 @@ class Menu extends Phaser.Scene {
             fixedWidth: 0
         }
         // title
-        this.add.text(borderSize + padding, borderSize, 'Soccer Drill', menuConfig);
+        this.add.bitmapText(width / 2, height / 2 - padding, 'toonyFont', 'Scoring A Touchdown', 96).setOrigin(0.5);
 
-        this.add.text(width / 2, 0,'HIGH SCORE:' + highScore, {
-            fontSize: '32px',
-            backgroundColor: '#33cc33',
-            fill: '#ffcc99'
-        }).setOrigin(0.5,0);
+        this.add.text(width / 2, padding,'HIGH SCORE:' + highScore, menuConfig).setOrigin(0.5,0);
       
-        // menu options
-        menuConfig.fontSize = 24;
-        this.add.text(width / 2, height - borderSize * 2,'use UP and DOWN arrows to select options, ENTER to select', menuConfig).setOrigin(0.5);
-        this.add.text(width / 2, height - borderSize ,'Game controls: ARROW KEYS to move', menuConfig).setOrigin(0.5);
-        
-
-        menuConfig.fontSize = 32;
-
-        let playOption = this.add.text(width / 2, borderSize + padding * 2, 'Play', menuConfig).setOrigin(0.5);
-        let creditsOption = this.add.text(width / 2, borderSize + padding * 3, 'Credits', menuConfig).setOrigin(0.5);
+        //menu
+        let playOption = this.add.bitmapText(width / 3, height / 2 + padding, 'toonyFont', 'Play', 64).setOrigin(0.5);
+        let creditsOption = this.add.bitmapText(2 * width / 3, height / 2 + padding, 'toonyFont', 'Credits', 64).setOrigin(0.5);
 
         let selectedOption = 0;
         let menuOptions = [playOption, creditsOption];
       
         // highlighting feature
-        menuOptions[selectedOption].setStyle({ backgroundColor: '#ff0' });
+        menuOptions[selectedOption].setTintFill(0xffff00)
       
-        this.input.keyboard.on('keydown-UP', () => {
-            menuOptions[selectedOption].setStyle({ backgroundColor: '#33cc33' });
-            selectedOption = (selectedOption - 1 + menuOptions.length) % menuOptions.length;
-            menuOptions[selectedOption].setStyle({ backgroundColor: '#ff0' });
+        this.input.keyboard.on('keydown-LEFT', () => {
+            menuOptions[selectedOption].clearTint()
+            selectedOption = 0
+            menuOptions[selectedOption].setTintFill(0xffff00)
         });
       
-        this.input.keyboard.on('keydown-DOWN', () => {
-            menuOptions[selectedOption].setStyle({ backgroundColor: '#33cc33' });
-            selectedOption = (selectedOption + 1) % menuOptions.length;
-            menuOptions[selectedOption].setStyle({ backgroundColor: '#ff0' });
+        this.input.keyboard.on('keydown-RIGHT', () => {
+            menuOptions[selectedOption].clearTint()
+            selectedOption = 1
+            menuOptions[selectedOption].setTintFill(0xffff00)
         });
       
         this.input.keyboard.on('keydown-SPACE', () => {

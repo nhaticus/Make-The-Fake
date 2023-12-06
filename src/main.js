@@ -21,16 +21,14 @@ let config = {
     physics: {
         default: 'arcade',
         arcade: {
-            x: 0,
-            y: 0,
-            width: width - borderSize * 2,
+            width: width,
             height: height,
-            debug: false
+            debug: true
         }
     },
     width: width,
-    height: height,
-    scene: [ Load, Menu, Play]
+    height: height + 100,
+    scene: [ Load, Menu, Credit, Play]
 }
 
 let highScore = 0;
