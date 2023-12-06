@@ -9,7 +9,8 @@ class Load extends Phaser.Scene{
         this.load.bitmapFont('toonyFont', '/font/ToonyFont.png', '/font/ToonyFont.fnt')
 
         //images
-        this.load.image('Menu', '/img/Menu.png')
+        this.load.image('menu', '/img/Menu.png')
+        this.load.image('field', '/img/field.png')
 
         //sounds
         

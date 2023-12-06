@@ -5,7 +5,7 @@ class Credit extends Phaser.Scene {
 
     create() {
         this.cameras.main.setBackgroundColor(0xFACADE);
-        this.add.image(0, 0, 'Menu').setOrigin(0, 0);
+        this.add.image(0, 0, 'menu').setOrigin(0, 0);
 
         let menuConfig = {
             fontFamily: 'Arial', 

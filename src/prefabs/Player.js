@@ -34,9 +34,11 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             playerDirection = 'down';
         }
 
+        
+
         playerVector.normalize();
 
-        this.setVelocity(playerVector.x * 200, playerVector.y * 200)
+        this.setVelocity(playerVector.x * 500, playerVector.y * 500)
         
         let playerMovement;
         playerVector.length() ? playerMovement = 'run' : playerMovement = 'idle';

@@ -18,16 +18,16 @@ let config = {
     render: {
         pixelArt: true
     },
+    width: width,
+    height: height + 100,
     physics: {
         default: 'arcade',
         arcade: {
-            width: width,
+            width: width ,
             height: height,
             debug: true
         }
     },
-    width: width,
-    height: height + 100,
     scene: [ Load, Menu, Credit, Play]
 }
 
