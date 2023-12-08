@@ -9,7 +9,7 @@ class Credit extends Phaser.Scene {
 
         let menuConfig = {
             fontFamily: 'Arial', 
-            fontSize: '24px',
+            fontSize: '16px',
             color: '#000',
             align: 'center',
             padding: {

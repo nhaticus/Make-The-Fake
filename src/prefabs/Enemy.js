@@ -7,14 +7,9 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
 
         // this.setCollideWorldBounds(true);
 
+        this.setImmovable(true)
         this.setVelocityX(-250)
-        this.play('enemy-left', false);
+        this.play('enemy-left', true)
+        this.setout
     }
-    update() {
-        
-        if(this.x < 0) {
-            this.destroy()
-        }
-    }
-
 }

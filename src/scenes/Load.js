@@ -38,7 +38,7 @@ class Load extends Phaser.Scene{
         this.anims.create({
             key: 'anim-bg',
             frameRate: 1,
-            repeate: -1,
+            repeat: -1,
             frames: this.anims.generateFrameNumbers('stadium', { 
                 frames: [0, 1] 
             })
@@ -48,7 +48,7 @@ class Load extends Phaser.Scene{
         this.anims.create({
             key: 'run-down',
             frameRate: 3,
-            repeate: -1,
+            repeat: -1,
             frames: this.anims.generateFrameNumbers('player', { 
                 frames: [3, 5] 
             })
@@ -68,7 +68,7 @@ class Load extends Phaser.Scene{
         this.anims.create({
             key: 'run-up',
             frameRate: 3,
-            repeate: -1,
+            repeat: -1,
             frames: this.anims.generateFrameNumbers('player', { 
                 frames: [0, 2] 
             })
@@ -88,7 +88,7 @@ class Load extends Phaser.Scene{
         this.anims.create({
             key: 'run-right',
             frameRate: 3,
-            repeate: -1,
+            repeat: -1,
             frames: this.anims.generateFrameNumbers('player', { 
                 frames: [6, 8] 
             })
@@ -108,7 +108,7 @@ class Load extends Phaser.Scene{
         this.anims.create({
             key: 'run-left',
             frameRate: 3,
-            repeate: -1,
+            repeat: -1,
             frames: this.anims.generateFrameNumbers('player', { 
                 frames: [9, 11] 
             })
@@ -128,7 +128,7 @@ class Load extends Phaser.Scene{
         this.anims.create({
             key: 'enemy-left',
             frameRate: 3,
-            repeate: -1,
+            repeat: -1,
             frames: this.anims.generateFrameNumbers('enemy', { 
                 frames: [9, 11] 
             })
