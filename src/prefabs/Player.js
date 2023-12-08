@@ -14,7 +14,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     }
     
 
-    update(cursors) {
+    update(cursors, scene) {
         
         let playerVector = new Phaser.Math.Vector2(0 , 0);
 
@@ -38,10 +38,18 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
         playerVector.normalize();
 
-        this.setVelocity(playerVector.x * 500, playerVector.y * 500)
+        this.setVelocity(playerVector.x * 250, playerVector.y * 100)
         
         let playerMovement;
         playerVector.length() ? playerMovement = 'run' : playerMovement = 'idle';
         this.play(playerMovement + '-' + playerDirection, true);
+
+        //condition
+        if(this.x > 2020) {
+            
+            over = true;
+            scene.add.bitmapText(this.x - this.width - borderSize, this.y - this.height - borderSize, 'toonyFont', 'TOUCH DOWN!', 96).setOrigin(0.5);
+
+        }
     }
 }

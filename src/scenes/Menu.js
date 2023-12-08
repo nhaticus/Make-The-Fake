@@ -34,18 +34,18 @@ class Menu extends Phaser.Scene {
         let menuOptions = [playOption, creditsOption];
       
         // highlighting feature
-        menuOptions[selectedOption].setTintFill(0xffff00)
+        menuOptions[selectedOption].setTintFill(0xf0e68c)
       
         this.input.keyboard.on('keydown-LEFT', () => {
             menuOptions[selectedOption].clearTint()
             selectedOption = 0
-            menuOptions[selectedOption].setTintFill(0xffff00)
+            menuOptions[selectedOption].setTintFill(0xffffe0)
         });
       
         this.input.keyboard.on('keydown-RIGHT', () => {
             menuOptions[selectedOption].clearTint()
             selectedOption = 1
-            menuOptions[selectedOption].setTintFill(0xffff00)
+            menuOptions[selectedOption].setTintFill(0xffffe0)
         });
       
         this.input.keyboard.on('keydown-SPACE', () => {
@@ -57,5 +57,8 @@ class Menu extends Phaser.Scene {
                 this.scene.start('creditScene');
             }
         });
+
+        //debug purposes
+        // this.scene.start('playScene');
     }
 }
