@@ -37,39 +37,36 @@ class Play extends Phaser.Scene {
         this.stadium.setImmovable(true)
         
         //enemy
-        // this.createEnemy()
-        this.enemyTimer = this.time.addEvent({
-            delay: 1000,
-            callback: this.createEnemy,
-            callbackScope: this,
-            loop: true
-        })
+        this.enemySpawned = false;
 
         //player
         this.player = new Player(this, 0, height, 'player', 4).setOrigin(0.5)
         this.physics.add.collider(this.player, this.stadium)
       
-        //smaller hitbox
+        //smaller hitbox to create a 3d feel
         this.player.setBodySize(this.player.width / 2, this.player.height / 3)
         this.player.body.setOffset(this.player.height / 4, 2 * this.player.height / 3)
 
+        //camera moves with the player
         this.cameras.main.setBounds(0, 0, this.map.width, this.map.height)
         this.cameras.main.startFollow(this.player, true, 0.25, 0.25)
         this.physics.world.setBounds(0, 0, this.map.width, this.map.height)
-
     }
 
     createEnemy() {
-        this.enemy = new Enemy(this, width, height - borderSize, 'enemy', 4).setOrigin(0.5)
+        let enemyX = Phaser.Math.Between(this.map.height - this.stadium.height, this.map.height);
+        this.enemy = new Enemy(this, width, enemyX, 'enemy', 4).setOrigin(0)
         this.enemy.setBodySize(this.enemy.width / 2, this.enemy.height / 3)
         this.enemy.body.setOffset(this.enemy.height / 4, 2 * this.enemy.height / 3)
 
+        //if enemy hit worldbound destroy
         this.enemy.on('worldbounds', () => {
-            if (!this.enemy.getBounds().intersects(this.physics.world.bounds)) {
+            // if (!this.enemy.getBounds().intersects(this.physics.world.bounds)) {
                 // Destroy the enemy if it's not within the world bounds
-                this.enemy.destroy();
+                // this.enemy.child.destroy();
+                this.enemy.destroy()
                 console.log('destroyed')
-            }
+            // }
         });
 
         this.physics.add.collider(this.player, this.enemy, () => {
@@ -93,7 +90,9 @@ class Play extends Phaser.Scene {
         //update game objects
         this.player.update(this.cursors, this)
 
-        
+        if (!this.enemySpawned){
+            this.createEnemy()
+            this.enemySpawned = true;
+        }
     }
-
 }
