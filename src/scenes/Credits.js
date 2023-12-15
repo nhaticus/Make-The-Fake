@@ -27,7 +27,7 @@ class Credit extends Phaser.Scene {
         this.add.bitmapText(width / 2, height / 2 , 'toonyFont', 'Scoring A Touchdown\n\
 by Nhat Thai\n\
 Assets: Nhat Thai\n\
-Sounds: \n\
+Sounds: https://zapsplat.com\n\
 Font: Toony Lines by Mans Greback AB ', 64).setOrigin(0.5).setCenterAlign();
 
     }

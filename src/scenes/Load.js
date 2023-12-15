@@ -23,6 +23,9 @@ class Load extends Phaser.Scene{
         })
 
         //sounds
+        this.load.audio('music', '/sounds/music.mp3')   //music from https://www.zapsplat.com/music/game-music-action-uplifting-house-anthem-fast-paced-retro-game-melody-leading-into-pumping-synth-chords/
+
+        this.load.audio('touchDown', '/sounds/touchdown.mp3')
         
         //spritsheets
         this.load.spritesheet('player', './spritesheets/player.png', {
@@ -164,8 +167,11 @@ class Load extends Phaser.Scene{
         });
 
         //music
+        this.sound.play('music',{
+            loop: true,
+            volume: 0.1,
+        });
 
-        
         this.scene.start('menuScene')
     }
 }

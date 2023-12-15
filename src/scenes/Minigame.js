@@ -7,7 +7,7 @@ class Minigame extends Phaser.Scene {
         this.out = false
         this.cameras.main.fadeIn(2000)
 
-        this.add.bitmapText(width / 2, height, 'toonyFont', 'DODGE!', 96).setOrigin(0.5);
+        this.add.bitmapText(width / 2, height, 'toonyFont', 'time is still ticking!', 96).setOrigin(0.5);
 
         //map
         this.rectangle = this.add.rectangle(width / 2, height / 2, width / 2, width / 2, 0xFFFFFF).setOrigin(0.5)

@@ -82,14 +82,13 @@ class Play extends Phaser.Scene {
         this.moveEnemy(this.enemy1)
         this.moveEnemy(this.enemy2)
         this.moveEnemy(this.enemy3)
-
-        // this.enemyGroup = this.physics.add.group([this.enemy1, this.enemy2, this.enemy3])
     }
 
     moveEnemy(enemy) {
         let enemyX = Phaser.Math.Between(this.player.x + width/ 2, this.player.x + width);
         let enemyY = Phaser.Math.Between(this.stadium.height + (this.player.height / 3), this.map.height);
         enemy.setPosition(enemyX , enemyY)
+        enemy.setVelocityX(-250)
 
         this.physics.add.collider(this.player, enemy, () => {
             this.hitEnemy(this.player, enemy);
@@ -108,10 +107,15 @@ class Play extends Phaser.Scene {
     update() {
         //when game is over
         if(over) {
+            this.sound.play('touchDown',{
+                loop: false,
+                volume: 0.1
+
+            })
             //destroy everything and popup winning text
-            this.enemy1.destroy()
-            this.enemy2.destroy()
-            this.enemy3.destroy()   
+            this.enemy1.setPosition(0, 0)
+            this.enemy2.setPosition(0, 0)
+            this.enemy3.setPosition(0, 0)  
             this.touchDown.setAlpha(1)
             this.player.setFrame(4)
 

@@ -1,3 +1,8 @@
+/*Game: Scoring a Touch Down 
+    by Nhat Thai
+Phaser's major components: 1)physics systems 2)cameras 3)text objects 4)animation manager 5)timers
+*/
+
 let width = 854;
 let height = 480;
 let borderSize = width / 8;
