@@ -15,7 +15,7 @@ let config = {
         arcade: {
             width: width ,
             height: height,
-            debug: true
+            // debug: true
         }
     },
     scene: [ Load, Menu, Credit, Play, Minigame]

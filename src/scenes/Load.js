@@ -12,9 +12,14 @@ class Load extends Phaser.Scene{
         //images
         this.load.image('menu', '/img/Menu.png')
         this.load.image('field', '/img/field.png')
+        this.load.image('goal', '/img/goal.png')
         this.load.spritesheet('stadium', '/img/stadium.png', {
             frameWidth: 2160,
             frameHeight: 300
+        })
+        this.load.spritesheet('health', '/img/healthbar.png', {
+            frameWidth: 27,
+            frameHeight: 9
         })
 
         //sounds

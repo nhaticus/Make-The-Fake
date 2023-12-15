@@ -30,7 +30,7 @@ class Football extends Phaser.Physics.Arcade.Sprite {
         }
 
         footballVector.normalize();
-        this.setVelocity(footballVector.x * 250, footballVector.y * 250)
+        this.setVelocity(footballVector.x * 100, footballVector.y * 100)
         this.play(footballDirection, true);
 
     }

@@ -4,6 +4,7 @@ class Minigame extends Phaser.Scene {
     };
 
     create() {
+        this.out = false
         this.cameras.main.fadeIn(2000)
 
         this.add.bitmapText(width / 2, height, 'toonyFont', 'DODGE!', 96).setOrigin(0.5);
@@ -13,44 +14,39 @@ class Minigame extends Phaser.Scene {
         this.cameras.main.setBounds(0, 0, this.rectangle.width, this.rectangle.height)
         this.physics.world.setBounds(width / 4, height / 2 - width / 4, this.rectangle.width, this.rectangle.height)
 
-        //timer
+        //touch zone
+        let randomX = Phaser.Math.Between(width / 4 + 24, 3 * width / 4 - 24)
+        let randomY = Phaser.Math.Between(height / 2 - width / 4 + 24, height / 2 + width / 4 - 24)
+        this.zone = this.add.sprite(randomX, randomY, 'goal').setOrigin(0.5).setScale(1.5)
+        this.physics.world.enable(this.zone)
+        this.zone.body.setSize(this.zone.width / 2,this.zone.height / 2);
+
+        //player
+        this.football = new Football(this, width / 2, height / 2, 'football', 0).setOrigin(0.5)
+
+        this.physics.add.overlap(this.football, this.zone, () => {
+            this.scene.resume('playScene').stop()
+        })
+
         let additionalTime = 0;
-        let timerText = this.add.text(width / 2 , padding ,'Overtime:' + additionalTime + 's',{
+        let timerText = this.add.text(width / 2 , padding ,'+Time:' + additionalTime + 's',{
             fontSize: 32,
             fontFamily: 'Arial',
             color: '#000'
         }).setOrigin(0.5);
+
+        //clock still ticking
         this.time.addEvent({
             delay: 1000,
             loop: true,
             callback: function() {
                 additionalTime++
                 timer++
-                timerText.text = 'Overtime:' + additionalTime + 's'
+                timerText.text = '+Time:' + additionalTime + 's'
             }
         })
-
-
-        this.input.keyboard.on('keydown-SPACE', () => {
-            this.scene.resume('playScene').stop()
-        })
-
-        //menu scene option
-        this.input.keyboard.on('keydown-M', () => {
-            over = false;
-            this.scene.start('menuScene');
-        });
-
-        //restart game option
-        this.input.keyboard.on('keydown-R', () => {
-            over = false;
-            this.scene.resume('playScene').stop();
-        }); 
-
         this.cursors = this.input.keyboard.createCursorKeys();
-        this.football = new Football(this, width / 2, height / 2, 'football', 0).setOrigin(0.5)
     }
-
     update() {
         this.football.update(this.cursors, this)
     }

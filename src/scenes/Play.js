@@ -33,12 +33,16 @@ class Play extends Phaser.Scene {
 
         //menu scene option
         this.input.keyboard.on('keydown-M', () => {
+            //reset all the global vriables
+            timer = 0
             over = false;
             this.scene.start('menuScene');
         });
 
         //restart game option
         this.input.keyboard.on('keydown-R', () => {
+            //reset all the global vriables
+            timer = 0
             over = false;
             this.scene.restart();
         }); 
@@ -104,11 +108,14 @@ class Play extends Phaser.Scene {
     update() {
         //when game is over
         if(over) {
+            //destroy everything and popup winning text
             this.enemy1.destroy()
             this.enemy2.destroy()
             this.enemy3.destroy()   
             this.touchDown.setAlpha(1)
+            this.player.setFrame(4)
 
+            //new highscore?
             if (highScore == 0){
                 highScore = timer
             } else if (highScore > timer) {
@@ -119,6 +126,7 @@ class Play extends Phaser.Scene {
         //update game objects
         this.player.update(this.cursors, this)
         
+        //move enemies when they are outside of player's view
         if (this.enemy1.x < this.player.x - (width / 2 + this.enemy1.width)) { 
             this.moveEnemy(this.enemy1)
         }
