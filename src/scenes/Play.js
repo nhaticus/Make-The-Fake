@@ -107,11 +107,6 @@ class Play extends Phaser.Scene {
     update() {
         //when game is over
         if(over) {
-            this.sound.play('touchDown',{
-                loop: false,
-                volume: 0.1
-
-            })
             //destroy everything and popup winning text
             this.enemy1.setPosition(0, 0)
             this.enemy2.setPosition(0, 0)
@@ -128,7 +123,9 @@ class Play extends Phaser.Scene {
         }
 
         //update game objects
-        this.player.update(this.cursors, this)
+        if (!over){
+            this.player.update(this.cursors, this)
+        }
         
         //move enemies when they are outside of player's view
         if (this.enemy1.x < this.player.x - (width / 2 + this.enemy1.width)) { 

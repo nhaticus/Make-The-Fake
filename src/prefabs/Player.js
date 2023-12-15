@@ -52,6 +52,10 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         //touchdown
         if(this.x > 2000 && !over) {
             over = true;
+            scene.sound.play('touchDown',{
+                loop: false,
+                volume: 0.1
+            })
         }
     }
 }

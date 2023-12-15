@@ -57,8 +57,5 @@ class Menu extends Phaser.Scene {
                 this.scene.start('creditScene');
             }
         });
-
-        //debug purposes
-        // this.scene.start('playScene');
     }
 }
