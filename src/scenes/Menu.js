@@ -39,13 +39,13 @@ class Menu extends Phaser.Scene {
         this.input.keyboard.on('keydown-LEFT', () => {
             menuOptions[selectedOption].clearTint()
             selectedOption = 0
-            menuOptions[selectedOption].setTintFill(0xffffe0)
+            menuOptions[selectedOption].setTintFill(0xf0e68c)
         });
       
         this.input.keyboard.on('keydown-RIGHT', () => {
             menuOptions[selectedOption].clearTint()
             selectedOption = 1
-            menuOptions[selectedOption].setTintFill(0xffffe0)
+            menuOptions[selectedOption].setTintFill(0xf0e68c)
         });
       
         this.input.keyboard.on('keydown-SPACE', () => {

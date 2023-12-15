@@ -29,6 +29,11 @@ class Load extends Phaser.Scene{
             frameWidth: 64,
             frameHeight: 64
         });  
+
+        this.load.spritesheet('football', './spritesheets/football.png', {
+            frameWidth: 16,
+            frameHeight: 16
+        })
     }
 
     create() {
@@ -134,6 +139,24 @@ class Load extends Phaser.Scene{
             })
         });
 
+        //football
+        this.anims.create({
+            key: 'horizontal',
+            frameRate: 0,
+            repeat: -1,
+            frames: this.anims.generateFrameNumbers('football', { 
+                frames: [0, 0] 
+            })
+        });
+
+        this.anims.create({
+            key: 'vertical',
+            frameRate: 0,
+            repeat: -1,
+            frames: this.anims.generateFrameNumbers('football', { 
+                frames: [1, 1] 
+            })
+        });
 
         //music
 

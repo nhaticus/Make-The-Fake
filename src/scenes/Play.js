@@ -11,6 +11,7 @@ class Play extends Phaser.Scene {
         }).setOrigin(0, 0);
         this.text.setScrollFactor(0)
 
+
         //menu scene option
         this.input.keyboard.on('keydown-M', () => {
             over = false;
@@ -32,67 +33,78 @@ class Play extends Phaser.Scene {
         //record arrow keys
         this.cursors = this.input.keyboard.createCursorKeys();
 
-        //stadium bg
+        //cool animated stadium bg
         this.stadium = this.physics.add.sprite(0, 0, 'stadium').setOrigin(0)
         this.stadium.setImmovable(true)
-        
-        //enemy
-        this.enemySpawned = false;
+        this.stadium.play('anim-bg', true)
 
         //player
-        this.player = new Player(this, 0, height, 'player', 4).setOrigin(0.5)
+        this.player = new Player(this, 0, height, 'player', 4).setOrigin(0)
         this.physics.add.collider(this.player, this.stadium)
-      
-        //smaller hitbox to create a 3d feel
-        this.player.setBodySize(this.player.width / 2, this.player.height / 3)
-        this.player.body.setOffset(this.player.height / 4, 2 * this.player.height / 3)
+
+        this.touchDown = this.add.bitmapText(width / 2, height / 2, 'toonyFont', 'TOUCH DOWN!\nR to restart\n M for menu', 72).setOrigin(0.5);
+        this.touchDown.setScrollFactor(0)
+        this.touchDown.setAlpha(0)
 
         //camera moves with the player
         this.cameras.main.setBounds(0, 0, this.map.width, this.map.height)
         this.cameras.main.startFollow(this.player, true, 0.25, 0.25)
         this.physics.world.setBounds(0, 0, this.map.width, this.map.height)
+
+        //enemy
+        this.enemy1 = new Enemy(this, 0, 0, 'enemy', 4).setOrigin(0, 1)
+        this.enemy2 = new Enemy(this, 0, 0, 'enemy', 4).setOrigin(0, 1)
+        this.enemy3 = new Enemy(this, 0, 0, 'enemy', 4).setOrigin(0, 1)
+
+        this.moveEnemy(this.enemy1)
+        this.moveEnemy(this.enemy2)
+        this.moveEnemy(this.enemy3)
+
+        // this.enemyGroup = this.physics.add.group([this.enemy1, this.enemy2, this.enemy3])
     }
 
-    createEnemy() {
-        let enemyX = Phaser.Math.Between(this.map.height - this.stadium.height, this.map.height);
-        this.enemy = new Enemy(this, width, enemyX, 'enemy', 4).setOrigin(0)
-        this.enemy.setBodySize(this.enemy.width / 2, this.enemy.height / 3)
-        this.enemy.body.setOffset(this.enemy.height / 4, 2 * this.enemy.height / 3)
+    moveEnemy(enemy) {
+        let enemyX = Phaser.Math.Between(this.player.x + width/ 2, this.player.x + width);
+        let enemyY = Phaser.Math.Between(this.stadium.height + (this.player.height / 3), this.map.height);
+        enemy.setPosition(enemyX , enemyY)
 
-        //if enemy hit worldbound destroy
-        this.enemy.on('worldbounds', () => {
-            // if (!this.enemy.getBounds().intersects(this.physics.world.bounds)) {
-                // Destroy the enemy if it's not within the world bounds
-                // this.enemy.child.destroy();
-                this.enemy.destroy()
-                console.log('destroyed')
-            // }
-        });
-
-        this.physics.add.collider(this.player, this.enemy, () => {
-            this.hitEnemy(this.player, this.enemy);
+        this.physics.add.collider(this.player, enemy, () => {
+            this.hitEnemy(this.player, enemy);
         })
     }
 
     hitEnemy(player, enemy) {
-        // this.enemy.destroy()
-
-        //pause the scene and send it to the back
+        this.moveEnemy(enemy)
+        this.scene.pause()
+        if(!this.scene.isActive('minigameScene')) {
+            this.scene.run('minigameScene')
+        }
         //bring a different game scene up
             //in game scene have a timer in which the player will have to dodge incoming objects, if successful set winMinigame to true and return to this scene
-        console.log('they collided')
     }
 
     update() {
-        //cool animated bg
-        this.stadium.play('anim-bg', true)
+        //when game is over
+        if(over) {
+            this.enemy1.destroy()
+            this.enemy2.destroy()
+            this.enemy3.destroy()   
+            this.touchDown.setAlpha(1)
+        }
 
         //update game objects
         this.player.update(this.cursors, this)
+        
+        if (this.enemy1.x < this.player.x - (width / 2 + this.enemy1.width)) { 
+            this.moveEnemy(this.enemy1)
+        }
 
-        if (!this.enemySpawned){
-            this.createEnemy()
-            this.enemySpawned = true;
+        if (this.enemy2.x < this.player.x - (width / 2 + this.enemy2.width)) { 
+            this.moveEnemy(this.enemy2)
+        }
+
+        if (this.enemy3.x < this.player.x - (width / 2 + this.enemy3.width)) { 
+            this.moveEnemy(this.enemy3)
         }
     }
 }

@@ -7,6 +7,10 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
         this.setCollideWorldBounds(true);
 
+        //smaller hitbox to create a 3d feel
+        this.setBodySize(this.width / 2, this.height / 3)
+        this.setOffset(this.height / 4, 2 * this.height / 3)
+
         this.score = 0;
 
         playerDirection = 'down'
@@ -46,9 +50,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         }
 
         //touchdown
-        if(this.x > 2020 && !over) {
+        if(this.x > 2000 && !over) {
             over = true;
-            scene.add.bitmapText(this.x - this.width - borderSize, this.y - this.height - borderSize, 'toonyFont', 'TOUCH DOWN!', 96).setOrigin(0.5);
         }
     }
 }
