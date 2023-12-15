@@ -22,6 +22,7 @@ let config = {
 }
 
 let highScore = 0;
+let timer = 0
 let over = false;
 let winMinigame = false;
 let playerDirection, footballDirection;

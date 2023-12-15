@@ -13,6 +13,24 @@ class Minigame extends Phaser.Scene {
         this.cameras.main.setBounds(0, 0, this.rectangle.width, this.rectangle.height)
         this.physics.world.setBounds(width / 4, height / 2 - width / 4, this.rectangle.width, this.rectangle.height)
 
+        //timer
+        let additionalTime = 0;
+        let timerText = this.add.text(width / 2 , padding ,'Overtime:' + additionalTime + 's',{
+            fontSize: 32,
+            fontFamily: 'Arial',
+            color: '#000'
+        }).setOrigin(0.5);
+        this.time.addEvent({
+            delay: 1000,
+            loop: true,
+            callback: function() {
+                additionalTime++
+                timer++
+                timerText.text = 'Overtime:' + additionalTime + 's'
+            }
+        })
+
+
         this.input.keyboard.on('keydown-SPACE', () => {
             this.scene.resume('playScene').stop()
         })

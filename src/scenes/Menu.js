@@ -21,7 +21,7 @@ class Menu extends Phaser.Scene {
         // title
         this.add.bitmapText(width / 2, height / 2 - padding, 'toonyFont', 'Scoring A Touchdown', 96).setOrigin(0.5);
 
-        this.add.text(width / 2, padding,'Personal Best:' + highScore, menuConfig).setOrigin(0.5,0);
+        this.add.text(width / 2, padding,'Personal Best:' + highScore + 's', menuConfig).setOrigin(0.5,0);
         
         menuConfig.fontSize = 16
         this.add.text(0, height, 'Use ARROW KEYS and SPACE to select option', menuConfig)

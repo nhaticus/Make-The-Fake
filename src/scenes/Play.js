@@ -4,6 +4,7 @@ class Play extends Phaser.Scene {
     }
 
     create() {
+        //instructions
         this.text = this.add.text(0, height ,'ARROW KEYS or WASD to move\nR to restart\nM for menu',{
             fontSize: 16,
             fontFamily: 'Arial',
@@ -11,6 +12,24 @@ class Play extends Phaser.Scene {
         }).setOrigin(0, 0);
         this.text.setScrollFactor(0)
 
+        //timer
+        let timerText = this.add.text(width , height ,'Time:' + timer + 's',{
+            fontSize: 32,
+            fontFamily: 'Arial',
+            color: '#000'
+        }).setOrigin(1, 0);
+        timerText.setScrollFactor(0)
+
+        this.time.addEvent({
+            delay: 1000,
+            loop: true,
+            callback: function() {
+                if (!over){
+                timer++
+            }
+                timerText.text = 'Time:' + timer + 's'
+            }
+        })
 
         //menu scene option
         this.input.keyboard.on('keydown-M', () => {
@@ -76,11 +95,10 @@ class Play extends Phaser.Scene {
     hitEnemy(player, enemy) {
         this.moveEnemy(enemy)
         this.scene.pause()
+        //bring a different game scene up
         if(!this.scene.isActive('minigameScene')) {
             this.scene.run('minigameScene')
         }
-        //bring a different game scene up
-            //in game scene have a timer in which the player will have to dodge incoming objects, if successful set winMinigame to true and return to this scene
     }
 
     update() {
@@ -90,6 +108,12 @@ class Play extends Phaser.Scene {
             this.enemy2.destroy()
             this.enemy3.destroy()   
             this.touchDown.setAlpha(1)
+
+            if (highScore == 0){
+                highScore = timer
+            } else if (highScore > timer) {
+                highScore = timer
+            }
         }
 
         //update game objects
